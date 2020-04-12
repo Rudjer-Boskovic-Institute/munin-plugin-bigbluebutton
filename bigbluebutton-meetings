@@ -1,0 +1,15 @@
+#!/bin/sh
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title BigBlueButton Meetings
+graph_vlabel bbbmeeting
+bbbmeeting.label bbbmeeting
+EOM
+        exit 0;;
+esac
+
+printf "bbbmeeting.value "
+mongo --quiet mongodb://127.0.1.1:27017/meteor --eval "db.meetings.find()" | grep "meetingEnded\" : false," | wc -l
+#audio=$(/opt/freeswitch/bin/fs_cli -x "show channels" | grep total | sed 's/ total.//')

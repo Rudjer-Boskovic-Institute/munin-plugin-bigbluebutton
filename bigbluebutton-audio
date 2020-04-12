@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title BigBlueButton Audio Channels 
+graph_vlabel bbbaudio
+bbbaudio.label bbbaudio
+EOM
+        exit 0;;
+esac
+
+printf "bbbaudio.value "
+/opt/freeswitch/bin/fs_cli -x "show channels" | grep total | sed 's/ total.//'

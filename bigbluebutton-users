@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title BigBlueButton Users
+graph_vlabel bbbuser
+bbbuser.label bbbuser
+EOM
+        exit 0;;
+esac
+
+printf "bbbuser.value "
+mongo --quiet mongodb://127.0.1.1:27017/meteor --eval "db.users.count({connectionStatus: 'online'})"
+
+#meetings=$(mongo --quiet mongodb://127.0.1.1:27017/meteor --eval "db.meetings.find()" | grep "meetingEnded\" : false," | wc -l)
+#audio=$(/opt/freeswitch/bin/fs_cli -x "show channels" | grep total | sed 's/ total.//')
