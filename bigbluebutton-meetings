@@ -11,4 +11,4 @@ EOM
 esac
 
 printf "bbbmeeting.value "
-mongo --quiet mongodb://127.0.1.1:27017/meteor --eval "db.meetings.find()" | grep "meetingEnded\" : false," | wc -l
+mongo --quiet mongodb://127.0.1.1:27017/meteor --eval "db.meetings.count({meetingEnded: false})"
